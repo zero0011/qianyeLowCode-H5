@@ -22,7 +22,7 @@ mongodb：一个基于分布式文件存储的数据库，比较灵活。
 
 # 开发TODOLIST
 
-- [ ] 支持webpack
-- [ ] 支持ts
-- [ ] 支持 less
+- [x] 支持webpack
+- [x] 支持ts
+- [x] 支持 less
 - [ ] 支持ant design
