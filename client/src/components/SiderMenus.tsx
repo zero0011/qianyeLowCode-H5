@@ -16,8 +16,8 @@ const SiderMenus: React.FC = ({ match }: any) => (
       defaultOpenKeys={['sub4']}
       mode="inline"
     >
-      <Menu.Item key="/">
-        <Link to="/">
+      <Menu.Item key="/page">
+        <Link to="/page">
           <HomeOutlined />
           <span>首页</span>
         </Link>

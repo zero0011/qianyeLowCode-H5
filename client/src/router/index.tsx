@@ -7,7 +7,8 @@ const About = lazy(() => import(/* webpackChunkName: 'about' */ "@/pages/About")
 
 const routes = () => (
   <Switch>
-    <Route exact path="/" component={Home} />
+    <Route exact path="/" render={() => <Redirect to="/page" />} />
+    <Route exact path="/page" component={Home} />
     <Route exact path="/page-list" component={About} />
   </Switch>
 )
