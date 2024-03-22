@@ -20,9 +20,16 @@ koa：后端语言采用nodejs，koa文档和学习资料也比较多，express�
 mongodb：一个基于分布式文件存储的数据库，比较灵活。
 
 
-# 开发TODOLIST
+# 开发环境配置
 
 - [x] 支持webpack
 - [x] 支持ts
 - [x] 支持 less
-- [ ] 支持ant design
+- [x] 支持ant design
+- [x] 路由配置
+
+
+# 基础业务开发
+
+- [x] header 和 sider
+- [ ] 登录系统
