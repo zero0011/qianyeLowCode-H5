@@ -1,9 +1,5 @@
 // router/index.js
-import NestedRoute from "./NestedRoute";
-import StatusRoute from "./StatusRoute";
-import Login from "@/pages/About";
 import React, { lazy } from 'react'
-
 
 const routes = [
   {
@@ -15,17 +11,8 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: Login,
-    meta: {
-
-    }
+    component: lazy(() => import(/* webpackChunkName: 'login' */"@/pages/Login")),
   }
 ];
 
 export default routes
-
-export {
-  NestedRoute,
-  StatusRoute
-}
-
