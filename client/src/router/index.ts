@@ -1,16 +1,20 @@
 // router/index.js
+import NestedRoute from "./NestedRoute";
+import StatusRoute from "./StatusRoute";
 import React, { lazy } from 'react'
-import Index from '@/pages/Index'
+
 
 const routes = [
   {
-    path: "/",
-    element: Index,
-  },
-  // {
-  //   path: "/about",
-  //   element: lazy(() => import('@/pages/About'))
-  // }
+    path: "/index",
+    component: lazy(() => import(/* webpackChunkName: 'index' */ "@/pages/Index")),
+  }
 ];
 
 export default routes
+
+export {
+  NestedRoute,
+  StatusRoute
+}
+
