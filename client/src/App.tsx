@@ -1,7 +1,10 @@
 import React from "react";
 import "./app.less";
-import { Switch } from "react-router";
-import routes, { NestedRoute } from './router';
+import { Switch, NavLink, Route } from "react-router-dom";
+import routes, { NestedRoute }  from './router';
+import Index from '@/pages/Index';
+import Login from '@/pages/About';
+
 
 export default function App() {
   return (
@@ -10,11 +13,12 @@ export default function App() {
         <h1>Hello World</h1>
       </header>
 
-      
-
       <Switch>
         {/* 配置路由 */}
-        {routes.map((route, i) => <NestedRoute {...route} key={i} />)}
+        <Route exact path='/' component={Index} />
+        <Route exact path='/login' component={Login} />
+
+        
       </Switch>
     </div>
   );
