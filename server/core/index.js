@@ -64,7 +64,7 @@ class Application{
 	// 启动服务
 	start(port){
 		this.$app.listen(port, ()=>{
-			console.log('server is starting........!');
+			console.log(`server is starting in ${port} ........!`);
 		});
 	}
 }
