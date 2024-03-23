@@ -27,7 +27,7 @@ mongodb：一个基于分布式文件存储的数据库，比较灵活。
 - [x] 支持 less
 - [x] 支持ant design
 - [x] 路由配置
-- [ ] 配置redux
+- [ ] 配置react-redux
 
 
 # 基础业务开发

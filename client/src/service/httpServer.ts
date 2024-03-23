@@ -12,7 +12,8 @@ axios.defaults.timeout = 30000; // 超时时间
 //请求拦截器
 axios.interceptors.request.use(config => {
   
-	config.headers.Authorization = store.getters.authorization;
+  // TODO: redux
+	// config.headers.Authorization = store.getters.authorization;
 	config.headers['x-csrf-token'] = Cookie.get('x-csrf-token');
 	return config
 }, error => {

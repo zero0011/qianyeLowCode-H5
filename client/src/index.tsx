@@ -4,7 +4,6 @@ import App from './App';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
-// TODO redux
 import { Provider } from "react-redux";
 
 const root = document.getElementById('root');
