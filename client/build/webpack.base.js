@@ -3,6 +3,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const isDev = process.env.NODE_ENV === 'development' // 是否是开发模式
+const webpack = require('webpack');
+
 
 module.exports = {
   entry: path.join(__dirname, "../src/index.tsx"), // 入口文件
@@ -88,6 +90,7 @@ module.exports = {
       template: path.resolve(__dirname, "../public/index.html"), // 模板取定义root节点的模板
       inject: true, // 自动注入静态资源
     }),
+    new webpack.ProgressPlugin(), // 添加这行来启用进度条
   ],
   cache: {
     type: 'filesystem', // 使用文件缓存
