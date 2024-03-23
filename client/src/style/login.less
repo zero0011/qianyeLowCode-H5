@@ -1,0 +1,96 @@
+@import './variables.less';
+
+.login {
+  height: 100vh;
+  .page-login {
+    height: 100%;
+    width: 100%;
+    padding: 1px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .login-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  .login-page-inner {
+    position: relative;
+    z-index: 10;
+    width: 360px;
+
+    padding: 20px 40px;
+    margin-top: -120px;
+    background: white;
+    box-shadow: 0px 0px 0px rgba(58, 127, 158, 0.35);
+    border-radius: 4px;
+    background: white;
+    box-shadow: 1px 1px 10px 10px #dedede;
+    .title {
+      padding: 10px 0 30px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: @primary;
+    }
+    .login-input {
+      height: 40px;
+    }
+    .btn-hover-container {
+      line-height: 40px;
+      position: relative;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+    /**
+    鼠标悬浮渐变
+    */
+    .btn-hover {
+      margin-top: 20px;
+      text-align: center;
+      color: white;
+      background: @color-gradient;
+      transition: all 3s;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .login-page-bottom {
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+    }
+    .forgot-password {
+      text-align: right;
+      font-size: 12px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      color: #333;
+    }
+  }
+  .switch-do-type {
+    font-size: 14px;
+    text-underline: #000;
+    text-align: right;
+    color: #333;
+    cursor: pointer;
+    p {
+      display: inline-block;
+    }
+    i {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    &:hover {
+      color: #000;
+    }
+  }
+}

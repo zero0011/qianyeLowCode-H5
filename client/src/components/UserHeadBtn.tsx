@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Avatar, Dropdown } from "antd";
 import type { MenuProps } from 'antd'
 import { UserOutlined } from '@ant-design/icons';
-import "../style/User.less";
+import "../style/user.less";
 
 function UserHeadBtn() {
 

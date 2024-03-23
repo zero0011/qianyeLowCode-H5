@@ -180,6 +180,10 @@ small {
   margin-bottom: 2rem !important;
 }
 
+.marginB20 {
+  margin-bottom: 20px;
+}
+
 .img-responsive {
   width: 100%;
   height: auto;
