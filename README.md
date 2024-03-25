@@ -1,5 +1,5 @@
 # qianyeLowCode-H5
-基于react17 + hooks + ts + redux + less + Ant Design + koa的全栈h5端低代码平台
+基于react18 + hooks + ts + redux + less + Ant Design + koa的全栈h5端低代码平台
 
 # 前言
 
@@ -27,7 +27,7 @@ mongodb：一个基于分布式文件存储的数据库，比较灵活。
 - [x] 支持 less
 - [x] 支持ant design
 - [x] 路由配置
-- [ ] 配置react-redux
+- [ ] 配置react-redux - 必须完成，否则无法解决全局状态管理的问题
 
 
 # 基础业务开发
@@ -37,5 +37,7 @@ mongodb：一个基于分布式文件存储的数据库，比较灵活。
   - [x] login路由配置 404路由配置(要点：必须更换整个页面)
   - [x] login 页面
   - [x] 启动后端服务
-  - [ ] 前端请求接口管理 axios
+  - [x] 解决前后端跨域问题
+  - [x] 前端请求接口管理 axios
+  - [ ] 前端登录模块接口设置
 

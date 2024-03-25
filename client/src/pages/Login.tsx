@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Button, Checkbox, Form, type FormProps, Input } from 'antd';
+import { login } from "@/api";
 import "@/style/login.less"
 
 type FieldType = {
@@ -7,15 +8,20 @@ type FieldType = {
   password: string;
 };
 
-
-
 function Login() {
 
   const [type, setType] = useState('login');
 
   // TODO: 登录和注册
   const doSubmit = () => {
-    console.log('6')
+    console.log(6)
+
+    login({username: 'zs', password: '5'}).then((data) => {
+      console.log(data)
+    }).catch((err:any) => {
+      console.log(err)
+    })
+
   }
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
