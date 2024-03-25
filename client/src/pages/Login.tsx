@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { Button, Checkbox, Form, type FormProps, Input } from 'antd';
-import { login } from "@/api";
+import userModel from "@/lib/userModel";
+import { useDispatch } from 'react-redux';
+import { updateAccessToken } from '@/redux/actions';
 import "@/style/login.less"
 
 type FieldType = {
@@ -11,16 +13,10 @@ type FieldType = {
 function Login() {
 
   const [type, setType] = useState('login');
+  const dispatch = useDispatch();
 
   // TODO: 登录和注册
   const doSubmit = () => {
-    console.log(6)
-
-    login({username: 'zs', password: '5'}).then((data) => {
-      console.log(data)
-    }).catch((err:any) => {
-      console.log(err)
-    })
 
   }
 
@@ -65,7 +61,7 @@ function Login() {
               </div>
             </Form.Item>
           </Form>
-          
+
           <div className="switch-do-type marginB20" onClick={switchType}>
             <i className="iconfont icon-iconfontzhizuobiaozhun47"></i>
             <span>{type === 'login' ? '立即注册' : '马上登录'}</span>
