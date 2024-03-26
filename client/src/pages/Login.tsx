@@ -1,8 +1,10 @@
 import React, { useState } from "react"
-import { Button, Checkbox, Form, type FormProps, Input } from 'antd';
+import { Form, type FormProps, Input } from 'antd';
 import userModel from "@/lib/userModel";
 import { useDispatch } from 'react-redux';
-import { updateAccessToken } from '@/redux/actions';
+import { updateAccessToken, updateUserInfo } from '@/redux/actions';
+import { errorMessage } from "@/utils";
+import useGoBeforeLoginUrl from "@/hooks/useGoBeforeLoginUrl";
 import "@/style/login.less"
 
 type FieldType = {
@@ -11,18 +13,11 @@ type FieldType = {
 };
 
 function Login() {
-
   const [type, setType] = useState('login');
+  // 使用Form.useForm()创建表单实例  
+  const [form] = Form.useForm();  
   const dispatch = useDispatch();
-
-  // TODO: 登录和注册
-  const doSubmit = () => {
-
-  }
-
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log('Success:', values);
-  }
+  const goBeforeLoginUrl = useGoBeforeLoginUrl(); // 自定义hook实现路由跳转
 
   const switchType = () => {
     if (type === 'login') {
@@ -32,6 +27,46 @@ function Login() {
     }
   }
 
+  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+    type === 'login' ? doLogin(values) : doRegister(values)
+  };
+
+  // 手动触发表单的提交  
+  const doSubmit = () => {
+    form.validateFields()
+      .then(values => {
+        // 验证通过，执行提交逻辑
+        onFinish(values);
+      })
+      .catch(() => {
+        errorMessage('请正确填写表单')
+      })
+  }
+
+  const doLogin = (values: FieldType) => {
+    userModel.doLogin(values)
+      .then((data: any) => {
+        dispatch(updateAccessToken(data.access_token));
+        dispatch(updateUserInfo(data.userInfo));
+        goBeforeLoginUrl();
+      })
+      .catch((err: any) => {
+        console.log(err)
+      })
+  }
+
+  const doRegister = (values: FieldType) => {
+    userModel.doRegister(values)
+      .then((data: any) => {
+        dispatch(updateAccessToken(data.access_token));
+        dispatch(updateUserInfo(data.userInfo));
+        goBeforeLoginUrl();
+      })
+      .catch((err: any) => {
+        console.log(err)
+      })
+  }
+
   return (
     <div className="login">
       <div className="page-login">
@@ -39,6 +74,7 @@ function Login() {
           <p className="title">qianyeLowCode-H5</p>
           <Form
             name="basic"
+            form={form}
             style={{ maxWidth: 600 }}
             onFinish={onFinish}
             autoComplete="off"

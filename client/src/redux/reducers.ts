@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { UPDATE_ACCESS_TOKEN } from './actions';  
+import { UPDATE_ACCESS_TOKEN, UPDATE_USER_INFO } from './actions';  
   
 const initialState = {  
   access_token: '',
@@ -12,7 +12,12 @@ function userReducer(state = initialState, action: any) {
     case UPDATE_ACCESS_TOKEN:
       return {
         ...state,
-        access_token: action.payload
+        access_token: action.token
+      }
+    case UPDATE_USER_INFO:
+      return {
+        ...state,
+        userInfo: action.userInfo
       }
     default:
       return state;  

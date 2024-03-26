@@ -74,7 +74,7 @@ const userModel = {
 	 * 跳转登录
 	 * @returns {Promise<void>}
 	 */
-	async goLogin() {
+	async goLogin(): Promise<void> {
 		// 将路由fullpath 保存在缓存中，用于登录完成后跳转
 		let indexOf = window.location.href.indexOf('#/')
 		let currentUrl = window.location.href.slice(indexOf + 1, window.location.href.length);

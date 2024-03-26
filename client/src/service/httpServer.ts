@@ -1,10 +1,7 @@
 import axios from 'axios';
 import { Cookie } from '@/utils/cookie';
-import { message } from 'antd';
+import { errorMessage } from '@/utils';
 import QS from 'qs';
-
-// 消息提醒
-const errorMessage = (content: string) => message.error(content, 2);
 
 const devBaseURL = 'http://localhost:4000';
 
