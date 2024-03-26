@@ -6,6 +6,7 @@ import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import PrivateRoute from './router/PrivateRoute';
 
 const root = document.getElementById('root');
 if (root) {
@@ -15,8 +16,9 @@ if (root) {
         <Suspense>
           <Switch>
             <Route path='/login' exact component={Login} />
-            <Route path='/notFound' exact component={NotFound}></Route>
-            <App />
+            <Route path='/notFound' exact component={NotFound} />
+            {/* 判断token进行路由拦截 */}
+            <PrivateRoute path='*' exact component={App} />
           </Switch>
         </Suspense>
       </BrowserRouter>

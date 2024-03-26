@@ -8,9 +8,9 @@ import store from '@/redux/store';
 const userModel = {
   /**
 	 * 检测是否登录
-	 * @returns {Promise<boolean>}
+	 * @returns {boolean}
 	 */
-	async checkLoginState(): Promise<boolean> {
+	checkLoginState(): boolean {
     const state = store.getState();
 		let userData = state.user;
 		return !!userData.access_token
