@@ -34,6 +34,10 @@ small {
   display: none;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .b-white {
   border-color: #ffffff;
 }
@@ -182,6 +186,14 @@ small {
 
 .marginB20 {
   margin-bottom: 20px;
+}
+
+.marginR20 {
+  margin-right: 20px;
+}
+
+.marginL20 {
+  margin-left: 20px;
 }
 
 .img-responsive {
