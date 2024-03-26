@@ -2,7 +2,6 @@ import React, { useState, Suspense } from "react";
 import { Layout } from 'antd'
 import "./app.less";
 import Header from "@/components/Header";
-import routes from './router';
 import SiderMenusRoute from "@/router/SiderMenusRoute"
 import ContentRoute from "@/router/index"
 

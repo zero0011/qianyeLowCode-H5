@@ -5,7 +5,7 @@
 /**
  * 存储localStorage
  */
-export const setLocalStorage = (name: string, content: string) => {
+export const setLocalStorage = (name: string, content: any) => {
 	if (!name) return;
 	if (typeof content !== 'string') {
 		content = JSON.stringify(content);
@@ -38,7 +38,7 @@ export const Cookie = {
 	 * @param name 
 	 * @returns {*}
 	 */
-	get(name: string) {
+	get(name: string): any {
 		let strCookie = document.cookie;
 		let arrCookie = strCookie.split("; ");
 		for (let i = 0; i < arrCookie.length; i++) {

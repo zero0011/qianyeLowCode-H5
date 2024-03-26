@@ -2,8 +2,10 @@ import axios from 'axios';
 import { Cookie } from '@/utils/cookie';
 import { errorMessage } from '@/utils';
 import QS from 'qs';
+import store from '@/redux/store';
 
 const devBaseURL = 'http://localhost:4000';
+const stateToStore = store.getState();
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
@@ -17,9 +19,7 @@ axios.defaults.timeout = 30000; // 超时时间
 
 // 请求拦截器
 axios.interceptors.request.use(config => {
-	// TODO: redux
-	// config.headers.Authorization = store.getters.authorization;
-	config.headers.Authorization = 'dear Authorization';
+	config.headers.Authorization = stateToStore.user.access_token ? `Bearer ${stateToStore.user.access_token}` : '';
 	config.headers['x-csrf-token'] = Cookie.get('x-csrf-token');
 	return config
 }, error => {
