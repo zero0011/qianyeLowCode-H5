@@ -3,19 +3,21 @@ import { Avatar, Dropdown } from "antd";
 import type { MenuProps } from 'antd'
 import { UserOutlined } from '@ant-design/icons';
 import "../style/user.less";
+import store from "@/redux/store";
+import useGoLogin from "@/hooks/useGoLogin";
+import useDoLogout from "@/hooks/useDoLogout";
 
 function UserHeadBtn() {
-
-  const [userName, setUserName] = useState('qianye');
-
-  // 退出登录
-  const loginOut = () => {
-    setUserName('zs')
-  }
+  const state = store.getState();
+  const goLogin = useGoLogin();
+  const doLogout = useDoLogout();
+  const userInfo = state.user.userInfo;
+  const userName = userInfo.name || 'admin';
+  const isLogined = !!state.user.access_token;
 
   // 获取个人信息
   const getUserInfo = () => {
-    
+
   }
 
 
@@ -30,7 +32,7 @@ function UserHeadBtn() {
     {
       key: '2',
       label: (
-        <span onClick={loginOut}>退出登录</span>
+        <span onClick={doLogout}>退出登录</span>
       ),
       danger: true,
     }
@@ -38,15 +40,19 @@ function UserHeadBtn() {
 
   return (
     <div className="user-head-btn-components">
-      <Dropdown menu={{ items }}>
-        <div>
-          <span className="user-head-btn-name">{userName}</span>
-          <Avatar
-            shape="square"
-            icon={<UserOutlined />}
-          />
-        </div>
-      </Dropdown>
+      {isLogined ?
+        <Dropdown menu={{ items }}>
+          <div>
+            <span className="user-head-btn-name">{userName}</span>
+            <Avatar
+              shape="square"
+              icon={<UserOutlined />}
+            />
+          </div>
+        </Dropdown> :
+        <div className="inline-block">
+          <span className="login-btn" onClick={goLogin}>登录/注册</span>
+        </div>}
     </div>
   )
 }
