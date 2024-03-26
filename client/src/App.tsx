@@ -1,15 +1,32 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import { Layout } from 'antd'
 import "./app.less";
 import Header from "@/components/Header";
 import SiderMenusRoute from "@/router/SiderMenusRoute"
 import ContentRoute from "@/router/index"
+import NProgress from 'nprogress';
+import { useHistory } from "react-router";
 
 
 const { Footer, Content, Sider } = Layout
 
 export default function App() {
   let [collapsed, setCollapsed] = useState(false);
+  const history = useHistory();
+
+  // 进度条
+  useEffect(() => {
+    const unlisten = history.listen((location) => {
+      NProgress.start(); // 开始进度条
+      const timerId = setTimeout(() => {  
+        NProgress.done(); // 结束进度条  
+        // 清除定时器  
+      }, 200);
+      return () => clearTimeout(timerId);
+    });
+
+    return () => unlisten();
+  }, [history]);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
