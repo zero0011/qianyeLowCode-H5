@@ -5,7 +5,7 @@
 // 用户相关
 export * from './modules/user'
 // // 页面相关
-// export * from './modules/page'
+export * from './modules/page'
 // // 图片库相关
 // export * from './modules/image'
 // // 解析psd
