@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
 
 import { getMyPages } from '@/api';
 
 function Index() {
 
   return (
-    <>
-      <div>click</div>
-    </>
+    // <>
+      {/* <div>click</div> */}
+    // </>
   )
 }
 
