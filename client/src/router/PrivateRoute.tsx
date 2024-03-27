@@ -18,15 +18,15 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...re
 
   useEffect(() => {
     // 检查用户是否登录，如果没有则重定向到登录页面 
-    if (!isUserLoggedIn()) {   
+    if (!isUserLoggedIn()) {
       goLogin();
     }
   }, []); // 空数组确保只在组件挂载时运行一次
   
-  return isUserLoggedIn() ? (  
-    <Route {...rest} render={(props) => <Component {...props} />} />  
-  ) : (  
-    <Redirect to={{ pathname: '/login' }} />  
+  return isUserLoggedIn() ? (
+    <Route {...rest} render={(props) => <Component {...props} />} />
+  ) : (
+    <Redirect to={{ pathname: '/login' }} />
   );
 };
 

@@ -5,7 +5,6 @@ import QS from 'qs';
 import store from '@/redux/store';
 
 const devBaseURL = 'http://localhost:4000';
-const stateToStore = store.getState();
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
@@ -19,7 +18,10 @@ axios.defaults.timeout = 30000; // 超时时间
 
 // 请求拦截器
 axios.interceptors.request.use(config => {
-	config.headers.Authorization = stateToStore.user.access_token ? `Bearer ${stateToStore.user.access_token}` : '';
+	// 重新获取最新state
+	const stateToStore = store.getState();
+	const access_token = stateToStore.user.access_token;
+	config.headers.Authorization = access_token ? `Bearer ${access_token}` : '';
 	config.headers['x-csrf-token'] = Cookie.get('x-csrf-token');
 	return config
 }, error => {
