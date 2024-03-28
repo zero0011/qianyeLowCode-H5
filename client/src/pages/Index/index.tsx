@@ -61,7 +61,9 @@ function Index() {
               <ThumbnailPanel pageType={searchParams.pageMode}/>
             </div>
             <div className="page-item">
-
+              <ThumbnailPanel pageType={searchParams.pageMode} pageData={{
+                coverImage: ''
+              }}/>
             </div>
           </div>
         </div>
