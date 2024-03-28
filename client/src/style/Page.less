@@ -1,0 +1,71 @@
+@import './variables.less';
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+
+
+.my-page-list {
+  height: 100%;
+}
+
+.page-list-wrapper {
+  height: calc(100% - 48px);
+}
+
+.my-page-nav-list {
+  height: 40px;
+  line-height: 40px;
+  z-index: 2;
+  margin-bottom: 20px;
+  .my-page-nav-item {
+    float: left;
+    padding-right: 32px;
+    text-align: center;
+    cursor: pointer;
+    &.active {
+      color: @primary;
+    }
+    &:hover {
+      color: @primary;
+    }
+  }
+}
+
+.full-input-w {
+  width: 100%;
+}
+
+.nav-tabs-label {
+  display: inline-block;
+  padding: 0 16px;
+  // height: 60px;
+  // line-height: 60px;
+}
+
+.page-search-wrapper {
+  padding: 0;
+}
+
+.page-item-wrapper {
+  .page-item {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 40px;
+  }
+}
+
+.my-page-list {
+  .page-search-wrapper {
+    .el-tabs__header {
+      margin: 0;
+    }
+    .el-tabs__nav-wrap {
+      padding: 0 30px;
+    }
+  }
+}
