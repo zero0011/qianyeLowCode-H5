@@ -9,7 +9,7 @@ interface pageData {
 }
 
 interface ThumbnailPanelProps {
-  pageType: string;
+  pageType?: string;
   pageData?: pageData;
 }
 

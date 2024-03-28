@@ -6,38 +6,58 @@ import { getMyPages } from '@/api';
 
 const items: TabsProps['items'] = [
   {
-    key: '1',
+    key: 'h5',
     label: <span className="nav-tabs-label">H5</span>,
   },
   {
-    key: '2',
+    key: 'longPage',
     label: <span className="nav-tabs-label">长页H5</span>,
   }
 ];
+
+interface pageListItem {
+  coverImage: string;
+  isPublish: boolean;
+  title: string;
+  _id: string;
+}
 
 function Index() {
 
   const [myCount, setMyCount] = useState(8);
   const [shareCount, setShareCount] = useState(10);
+  const [pageList, setPageList] = useState([]);
 
   const [searchParams, setSearchParams] = useState({
     type: 'my',
-		pageMode: 'h5'
-  }); 
-  
-  useEffect(() => {   
+    pageMode: 'h5'
+  });
+
+  useEffect(() => {
     getMyPages(searchParams)
-      .then((data: any) => {
-        console.log(data)
+      .then((res: any) => {
+        setPageList(res.body.pages || []);
+        setMyCount(res.body.myPageCount);
+        setShareCount(res.body.myCooperationPageCount);
       })
       .catch((err: any) => {
         console.log(err)
-      })   
-  }, []); // 在组件首次挂载时执行  
+      })
+  }, [searchParams]); // 在组件首次挂载和searchParams变化时执行
 
   const onChange = (key: string) => {
-    console.log(key);
+    setSearchParams({
+      ...searchParams,
+      pageMode: key
+    })
   };
+
+  const doSearch = (type: string) => {
+    setSearchParams({
+      ...searchParams,
+      type
+    })
+  }
 
   return (
     <div className="clearfix my-page-list">
@@ -46,10 +66,10 @@ function Index() {
 
         <div className="page-content">
           <div className="my-page-nav-list">
-            <div className={`my-page-nav-item ${searchParams.type === 'my' ? 'active' : ''}`}>
+            <div className={`my-page-nav-item ${searchParams.type === 'my' ? 'active' : ''}`} onClick={() =>doSearch('my')}>
               我的作品({myCount})
             </div>
-            <div className={`my-page-nav-item ${searchParams.type === 'cooperation' ? 'active' : ''}`}>
+            <div className={`my-page-nav-item ${searchParams.type === 'cooperation' ? 'active' : ''}`} onClick={() => doSearch('cooperation')}>
               参与作品({shareCount})
             </div>
           </div>
@@ -57,14 +77,20 @@ function Index() {
           {/* 页面列表 */}
 
           <div className="page-item-wrapper">
+            {/* 创建页面 */}
             <div className="page-item">
-              <ThumbnailPanel pageType={searchParams.pageMode}/>
+              <ThumbnailPanel pageType={searchParams.pageMode} />
             </div>
-            <div className="page-item">
-              <ThumbnailPanel pageType={searchParams.pageMode} pageData={{
-                coverImage: ''
-              }}/>
-            </div>
+
+            {/* 已有页面 */}
+            {pageList.map((item: pageListItem) => {
+              return (
+                <div className="page-item" key={item._id}>
+                  <ThumbnailPanel pageData={item} />
+                </div>
+              );
+            })}
+
           </div>
         </div>
       </div>
