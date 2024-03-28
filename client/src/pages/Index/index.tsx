@@ -59,6 +59,23 @@ function Index() {
     })
   }
 
+  // 操作按钮类型，分为我的，我的协作，和已发布的三种状态
+  const operationBtn = (isPublished: boolean) => {
+    let baseBtn = ['edit', 'copyTemplate', 'setTemplate'];
+    if (searchParams.type === 'my') {
+      baseBtn = [...baseBtn, 'cooperation', 'delete']
+    }
+    if (searchParams.type === 'cooperation') {
+      baseBtn = [...baseBtn, 'unCooperation']
+    }
+    if (isPublished) {
+      baseBtn = [...baseBtn, 'copyUrl', 'viewPageData']
+    } else {
+      baseBtn = [...baseBtn, 'publish']
+    }
+    return baseBtn;
+  }
+
   return (
     <div className="clearfix my-page-list">
       <div className="page-search-wrapper bg-white">
@@ -66,7 +83,7 @@ function Index() {
 
         <div className="page-content">
           <div className="my-page-nav-list">
-            <div className={`my-page-nav-item ${searchParams.type === 'my' ? 'active' : ''}`} onClick={() =>doSearch('my')}>
+            <div className={`my-page-nav-item ${searchParams.type === 'my' ? 'active' : ''}`} onClick={() => doSearch('my')}>
               我的作品({myCount})
             </div>
             <div className={`my-page-nav-item ${searchParams.type === 'cooperation' ? 'active' : ''}`} onClick={() => doSearch('cooperation')}>
@@ -86,7 +103,7 @@ function Index() {
             {pageList.map((item: pageListItem) => {
               return (
                 <div className="page-item" key={item._id}>
-                  <ThumbnailPanel pageData={item} />
+                  <ThumbnailPanel pageData={item} btnList={operationBtn(item.isPublish)} />
                 </div>
               );
             })}
