@@ -1,8 +1,11 @@
 import { createUUID } from '@/utils/index'
 import { cloneDeep, merge } from "lodash";
 import $config from '@/config/index'
+
+import { ProjectConfigType, PageConfigType, ElementConfigType } from './type';
+
 // 元素配置信息字段
-let elementConfig = {
+let elementConfig: ElementConfigType = {
 	elName: '', // 组件名
 	animations: [], // 动画
 	commonStyle: {
@@ -43,7 +46,7 @@ let elementConfig = {
 	valueType: 'String' // 值类型
 }
 // 页面配置信息字段
-let pageConfig = {
+let pageConfig: PageConfigType = {
 	name: '',
 	elements: [],
 	commonStyle: {
@@ -54,7 +57,7 @@ let pageConfig = {
 	config: {}
 }
 // 项目配置信息字段
-let projectConfig = {
+let projectConfig: ProjectConfigType = {
 	name: '',
 	title: '未命名场景',
 	description: '我用夸克可视化编辑器做了一个超酷炫的H5，快来看看吧。',

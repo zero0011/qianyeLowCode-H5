@@ -3,7 +3,10 @@ import { PlusOutlined } from "@ant-design/icons";
 import defaultCoverImage from '@/assets/imgs/quark--pagecover-image.png';
 import { Button, Dropdown } from "antd";
 import type { MenuProps } from 'antd'
-import DataModel from "@/pages/editor/DataModel";
+import DataModel from "@/pages/Editor/DataModel";
+import { createPage } from "@/api";
+import { errorMessage } from "@/utils";
+import { useHistory } from "react-router";
 
 interface pageData {
   coverImage: string
@@ -63,10 +66,22 @@ const ThumbnailPanel: React.FC<ThumbnailPanelProps> = ({
   showPublishState = true,
   btnList
 }) => {
+  const history = useHistory();
+
   // 新建页面
   const newPage = () => {
     const newPageData = DataModel.getProjectConfig();
-    console.log(newPageData)
+    createPage({...newPageData})
+      .then((res: any) => {
+        if (res.body) {
+          history.push('/editor', {
+            id: '1'
+          })
+        }
+      })
+      .catch((err) => {
+        errorMessage(err);
+      })
   }
 
   // 预览

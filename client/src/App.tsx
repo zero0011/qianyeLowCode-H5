@@ -5,14 +5,16 @@ import Header from "@/components/Header";
 import SiderMenusRoute from "@/router/SiderMenusRoute"
 import ContentRoute from "@/router/index"
 import NProgress from 'nprogress';
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 
 const { Footer, Content, Sider } = Layout
 
 export default function App() {
   let [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
   const history = useHistory();
+  const isEditPage = location.pathname === '/editor'; // 判断当前是否是编辑页面
 
   // 进度条
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function App() {
       <Header />
 
       <Layout style={{ paddingTop: '64px' }}>
-        <Sider
+        {!isEditPage && <Sider
           width={200}
           style={{ background: '#fff' }}
           collapsible
@@ -43,8 +45,8 @@ export default function App() {
           theme="light"
         >
           <SiderMenusRoute />
-        </Sider>
-        <Layout className={collapsed ? 'content-normal' : 'content-max'}>
+        </Sider>}
+        <Layout className={!isEditPage ? collapsed ? 'content-normal' : 'content-max' : ''}>
           <Content style={{ margin: 0, minHeight: 280 }}>
             {/* Suspense处理懒加载的异步问题 */}
             <Suspense>
