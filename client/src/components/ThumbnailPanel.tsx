@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import defaultCoverImage from '@/assets/imgs/quark--pagecover-image.png';
 import { Button, Dropdown } from "antd";
 import type { MenuProps } from 'antd'
 import DataModel from "@/pages/Editor/DataModel";
-import { createPage } from "@/api";
+import { createPage, copyPage } from "@/api";
 import { errorMessage } from "@/utils";
 import { useHistory } from "react-router";
 
@@ -74,10 +74,23 @@ const ThumbnailPanel: React.FC<ThumbnailPanelProps> = ({
     createPage({...newPageData})
       .then((res: any) => {
         if (res.body) {
-          history.push('/editor', {
-            id: '1'
-          })
+          history.push(`/editor?id=${res.body._id}`);
         }
+      })
+      .catch((err) => {
+        errorMessage(err);
+      })
+  }
+
+  // 编辑
+  const edit = () => {
+    history.push(`/editor?id=${pageData?._id}`);
+  }
+
+  const handCopyPage = () => {
+    copyPage({ id: pageData?._id })
+      .then((res: any) => {
+        history.push(`editor?id=${res.body._id}`)
       })
       .catch((err) => {
         errorMessage(err);
@@ -89,13 +102,25 @@ const ThumbnailPanel: React.FC<ThumbnailPanelProps> = ({
     console.log(id)
   }
 
+  const deleteTemplate = () => {
+    
+  }
+
+  const command = (eventType: string) => {
+    switch(eventType) {
+      case 'delete':
+        deleteTemplate();
+        break
+    }
+  }
+
   const items: MenuProps['items'] = operationDataList
     .filter((item) => btnList?.includes(item.eventType))
     .map((item, index) => (
       {
         key: `${index + 1}`,
         label: (
-          <span className="dropdown-item">{item.title}</span>
+          <span className="dropdown-item" onClick={() => command(item.eventType)}>{item.title}</span>
         ),
         danger: item.extraClassName === 'error'
       }
@@ -118,13 +143,13 @@ const ThumbnailPanel: React.FC<ThumbnailPanelProps> = ({
       </div>
       {btnList?.length && <div className="border-T thumbnail-panel-btn">
         {btnList.includes('edit') && <div className="btn-wrapper">
-          <Button type="text" size="small">编辑</Button>
+          <Button type="text" size="small" onClick={edit}>编辑</Button>
         </div>}
         {btnList.includes('useTemplate') && <div className="btn-wrapper">
           <Button type="text" size="small">使用模板</Button>
         </div>}
         {btnList.includes('copyTemplate') && <div className="btn-wrapper">
-          <Button type="text" size="small">复制</Button>
+          <Button type="text" size="small" onClick={handCopyPage}>复制</Button>
         </div>}
         <div className="btn-wrapper">
           <Dropdown menu={{ items }}  placement="topLeft">
