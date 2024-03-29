@@ -9,19 +9,26 @@ h5端的低代码平台其实已经不少了，但是使用最新的 react17 甚
 - node v14.19.3
 - npm v6.14.17
 
+# 低代码平台原理与设计
+
+编辑器生成页面JSON数据
+服务端负责存取JSON数据
+渲染时从服务端取数据JSON交给前端模板处理。
+
+
 # 技术栈
 
-前端：
-- react: 模块化开发。
-- TypeScrpit: 开发语言
-- redux: 状态管理
-- less: css预编译器。
-- Ant Design：不造轮子
-- loadsh：工具类
+- 前端：
+  - react: 模块化开发。
+  - TypeScrpit: 开发语言
+  - redux: 状态管理
+  - less: css预编译器。
+  - Ant Design：不造轮子
+  - loadsh：工具类
 
-服务端：
-koa：后端语言采用nodejs，koa文档和学习资料也比较多，express原班人马打造，这个正合适。
-mongodb：一个基于分布式文件存储的数据库，比较灵活。
+- 服务端：
+  - koa：后端语言采用nodejs，用koa2实现后端的MVC架构
+  - mongodb：一个基于分布式文件存储的数据库
 
 
 # 开发环境配置
