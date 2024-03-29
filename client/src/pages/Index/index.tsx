@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import ThumbnailPanel from '@/components/ThumbnailPanel';
+import PreviewPage from '@/components/PreviewPage';
 import { getMyPages } from '@/api';
 
 const items: TabsProps['items'] = [
@@ -27,6 +28,8 @@ function Index() {
   const [myCount, setMyCount] = useState(8);
   const [shareCount, setShareCount] = useState(10);
   const [pageList, setPageList] = useState([]);
+  const [previewId, setPreviewId] = useState('');
+  const [isShowPreview, setIsShowPreview] = useState(false);
 
   const [searchParams, setSearchParams] = useState({
     type: 'my',
@@ -44,6 +47,13 @@ function Index() {
         console.log(err)
       })
   }
+
+  const showPreview = (id: string) => {
+    setPreviewId(id);
+    setIsShowPreview(true);
+  }
+
+  const closePreview = () => setIsShowPreview(false);
 
   useEffect(() => getPageList(), [searchParams]); // 在组件首次挂载和searchParams变化时执行
 
@@ -109,6 +119,7 @@ function Index() {
                     pageData={item}
                     btnList={operationBtn(item.isPublish)}
                     getPageList={getPageList}
+                    showPreview={showPreview}
                   />
                 </div>
               );
@@ -117,6 +128,9 @@ function Index() {
           </div>
         </div>
       </div>
+
+      {/* 预览 */}
+      {isShowPreview && <PreviewPage pageId={previewId} closePreview={closePreview}/>}
     </div>
   )
 }

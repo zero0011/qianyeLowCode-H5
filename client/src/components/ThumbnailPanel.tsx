@@ -21,6 +21,7 @@ interface ThumbnailPanelProps {
   showPublishState?: boolean;
   btnList?: Array<any>;
   getPageList?: Function
+  showPreview?: Function
 }
 
 const operationDataList = [{
@@ -66,7 +67,8 @@ const ThumbnailPanel: React.FC<ThumbnailPanelProps> = ({
   pageData,
   showPublishState = true,
   btnList,
-  getPageList
+  getPageList,
+  showPreview
 }) => {
   const history = useHistory();
 
@@ -101,7 +103,7 @@ const ThumbnailPanel: React.FC<ThumbnailPanelProps> = ({
 
   // 预览
   const preview = (id: string) => {
-    console.log(id)
+    showPreview && showPreview(id)
   }
 
   const deleteTemplate = async () => {
