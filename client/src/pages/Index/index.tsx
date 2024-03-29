@@ -33,7 +33,7 @@ function Index() {
     pageMode: 'h5'
   });
 
-  useEffect(() => {
+  const getPageList = () => {
     getMyPages(searchParams)
       .then((res: any) => {
         setPageList(res.body.pages || []);
@@ -43,7 +43,9 @@ function Index() {
       .catch((err: any) => {
         console.log(err)
       })
-  }, [searchParams]); // 在组件首次挂载和searchParams变化时执行
+  }
+
+  useEffect(() => getPageList(), [searchParams]); // 在组件首次挂载和searchParams变化时执行
 
   const onChange = (key: string) => {
     setSearchParams({
@@ -103,7 +105,11 @@ function Index() {
             {pageList.map((item: pageListItem) => {
               return (
                 <div className="page-item" key={item._id}>
-                  <ThumbnailPanel pageData={item} btnList={operationBtn(item.isPublish)} />
+                  <ThumbnailPanel
+                    pageData={item}
+                    btnList={operationBtn(item.isPublish)}
+                    getPageList={getPageList}
+                  />
                 </div>
               );
             })}

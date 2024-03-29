@@ -2,6 +2,7 @@ import { message } from 'antd';
 
 // 消息提醒
 export const errorMessage = (content: string) => message.error(content, 2);
+export const successMessage = (content: string) => message.success(content, 2);
 
 /**
  * 生成uuid方法

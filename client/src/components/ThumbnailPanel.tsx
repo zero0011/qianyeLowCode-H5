@@ -4,8 +4,8 @@ import defaultCoverImage from '@/assets/imgs/quark--pagecover-image.png';
 import { Button, Dropdown } from "antd";
 import type { MenuProps } from 'antd'
 import DataModel from "@/pages/Editor/DataModel";
-import { createPage, copyPage } from "@/api";
-import { errorMessage } from "@/utils";
+import { createPage, copyPage, deletePage } from "@/api";
+import { errorMessage, successMessage } from "@/utils";
 import { useHistory } from "react-router";
 
 interface pageData {
@@ -20,6 +20,7 @@ interface ThumbnailPanelProps {
   pageData?: pageData;
   showPublishState?: boolean;
   btnList?: Array<any>;
+  getPageList?: Function
 }
 
 const operationDataList = [{
@@ -64,7 +65,8 @@ const ThumbnailPanel: React.FC<ThumbnailPanelProps> = ({
   pageType,
   pageData,
   showPublishState = true,
-  btnList
+  btnList,
+  getPageList
 }) => {
   const history = useHistory();
 
@@ -102,8 +104,11 @@ const ThumbnailPanel: React.FC<ThumbnailPanelProps> = ({
     console.log(id)
   }
 
-  const deleteTemplate = () => {
-    
+  const deleteTemplate = async () => {
+    await deletePage({ id: pageData?._id })
+    successMessage('删除成功！');
+    // 重新获取列表
+    getPageList && getPageList()
   }
 
   const command = (eventType: string) => {

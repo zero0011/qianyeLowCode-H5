@@ -19,9 +19,9 @@ const userModel = {
    * 登录
    * @param options
    * @param type
-   * @returns {Promise<void>}
+   * @returns {Promise<any>}
    */
-  async doLogin(data: any): Promise<void> {
+  async doLogin(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
       login(data).then((res:any) => {
         resolve(res.body)
@@ -35,9 +35,9 @@ const userModel = {
 	 * 注册
 	 * @param options
 	 * @param type
-	 * @returns {Promise<void>}
+	 * @returns {Promise<any>}
 	 */
-	async doRegister(data: any): Promise<void> {
+	async doRegister(data: any): Promise<any> {
 		return new Promise((resolve, reject) => {
 			register(data).then((res: any) => {
 				resolve(res.body)

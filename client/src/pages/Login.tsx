@@ -43,28 +43,26 @@ function Login() {
       })
   }
 
-  const doLogin = (values: FieldType) => {
-    userModel.doLogin(values)
-      .then((data: any) => {
-        dispatch(updateAccessToken(data.access_token));
-        dispatch(updateUserInfo(data.userInfo));
-        goBeforeLoginUrl();
-      })
-      .catch((err: any) => {
-        console.log(err)
-      })
+  const doLogin = async (values: FieldType) => {
+    try {
+      const data = await userModel.doLogin(values);
+      dispatch(updateAccessToken(data.access_token));
+      dispatch(updateUserInfo(data.userInfo));
+      goBeforeLoginUrl();
+    } catch(err) {
+      console.log(err);
+    }
   }
 
-  const doRegister = (values: FieldType) => {
-    userModel.doRegister(values)
-      .then((data: any) => {
-        dispatch(updateAccessToken(data.access_token));
-        dispatch(updateUserInfo(data.userInfo));
-        goBeforeLoginUrl();
-      })
-      .catch((err: any) => {
-        console.log(err)
-      })
+  const doRegister = async (values: FieldType) => {
+    try {
+      const data = await userModel.doRegister(values);
+      dispatch(updateAccessToken(data.access_token));
+      dispatch(updateUserInfo(data.userInfo));
+      goBeforeLoginUrl();
+    } catch(err) {
+      console.log(err)
+    }
   }
 
   return (
