@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, Tooltip } from 'antd';
 import type { TabsProps } from 'antd';
 import { UnorderedListOutlined, BookOutlined, CodeSandboxOutlined } from "@ant-design/icons";
-import ComponentLibs from "@/components/ComponentLibs";
-import PageManage from "@/components/PageManage";
-import TemplateLibs from "@/components/TemplateLibs";
+import ComponentLibs from "@/pages/Editor/components/ComponentLibs";
+import PageManage from "@/pages/Editor/components/PageManage";
+import TemplateLibs from "@/pages/Editor/components/TemplateLibs";
+import { getPageDetail } from "@/api";
+import { useLocation } from "react-router";
 
 // 定义 Editor 组件的 props 类型  
-interface EditorProps {
-   
-}
+interface EditorProps {}
 
 const items: TabsProps['items'] = [
   {
@@ -36,8 +36,24 @@ const items: TabsProps['items'] = [
 ];
 
 const Editor: React.FC<EditorProps> = () => {
-
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const [id, setId] = useState(searchParams.get('id'));
   const [activeSideBar, setActiveSideBar] = useState('componentLibs');
+
+  const initPageData = async () => {
+    try {
+      const res = await getPageDetail({ pageId: id });
+      // TODO: redux
+      console.log(res)
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    initPageData();
+  }, [id])
 
   return (
     <div className="page-editor editor-wrapper">
