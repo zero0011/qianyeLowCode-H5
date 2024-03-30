@@ -219,6 +219,7 @@ small {
   line-height: 31px;
   text-align: center;
   color: #fff;
+  cursor: pointer;
 }
 
 .ant-menu-submenu-horizontal>.ant-menu {
