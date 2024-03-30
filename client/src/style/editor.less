@@ -1,0 +1,58 @@
+.editor-wrapper {
+  display: flex;
+  height: 100%;
+  position: relative;
+  .editor-side-bar {
+    width: 55px;
+  }
+  .editor-page-edit-wrapper {
+    width: 210px;
+    padding: 0 1px;
+  }
+  .editor-main {
+    flex: 1;
+    background: #f0f2f5;
+    position: relative;
+  }
+  .el-attr-edit-wrapper {
+    width: 380px;
+    padding: 0;
+  }
+  .ant-tabs-nav {
+    width: 100%;
+  }
+}
+
+.control-bar-wrapper {
+  position: absolute;
+  top: -44px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+}
+
+.editor-side-bar {
+  .el-tabs__item.is-active {
+    background: rgba(37, 165, 137, 0.09);
+  }
+}
+
+.el-attr-edit-wrapper {
+  .el-tabs {
+    height: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+  }
+  .el-tabs__content {
+    height: calc(100% - 55px);
+    & > div {
+      height: 100%;
+    }
+    .attr-edit-inner {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+}
