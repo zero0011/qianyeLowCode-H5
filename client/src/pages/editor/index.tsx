@@ -2,7 +2,7 @@ import React from "react";
 
 function Editor() {
   return <div>
-    editor
+    editor - 基本框架
   </div>
 }
 
