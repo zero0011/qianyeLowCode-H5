@@ -3,12 +3,11 @@ import { Cookie } from '@/utils/cookie';
 import { errorMessage } from '@/utils';
 import QS from 'qs';
 import store from '@/redux/store';
-
-const devBaseURL = 'http://localhost:4000';
+import { baseURL } from '@/config';
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
-	axios.defaults.baseURL = devBaseURL;
+	axios.defaults.baseURL = baseURL;
 } else if (process.env.NODE_ENV == 'production') {
 	axios.defaults.baseURL = 'https://www.production.com';
 }
@@ -97,12 +96,19 @@ let downloadFile = (url: string) => {
 	window.open(url)
 };
 
+interface ResType {
+	body: Object
+	code: number
+	msg: string
+	status: number
+}
+
 /**
  * get方法，对应get请求
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
  */
-export function get(url: string, params?: any) {
+export function get(url: string, params?: any): Promise<ResType> {
 	return new Promise((resolve, reject) => {
 		axios.get(url, {
 			params: params || {}
@@ -119,7 +125,7 @@ export function get(url: string, params?: any) {
  * @param {String} url [请求的url地址] 
  * @param {Object} params [请求时携带的参数] 
  */
-export function post(url: string, params: any) {
+export function post(url: string, params: any): Promise<ResType> {
 	return new Promise((resolve, reject) => {
 		axios.post(url, params)
 			.then(res => {
@@ -131,7 +137,7 @@ export function post(url: string, params: any) {
 	});
 }
 
-export function postFormData(url: string, params: any) {
+export function postFormData(url: string, params: any): Promise<ResType> {
 	return new Promise((resolve, reject) => {
 		const data = QS.stringify(params) || {};
 		axios.post(url, data, {
@@ -148,7 +154,7 @@ export function postFormData(url: string, params: any) {
 	})
 }
 
-export function put(url: string, params: any) {
+export function put(url: string, params: any): Promise<ResType> {
 	return new Promise((resolve, reject) => {
 		axios.put(url, {
 			params: params
@@ -160,7 +166,7 @@ export function put(url: string, params: any) {
 	})
 }
 
-export function deleteRequest(url: string, params: any) {
+export function deleteRequest(url: string, params: any): Promise<ResType> {
 	return new Promise((resolve, reject) => {
 		axios.delete(url, {
 			params: params
@@ -182,7 +188,7 @@ export function getFile(url: string, params: any) {
 	for (let key in tempParams) {
 		list.push(key.toString() + '=' + tempParams[key]);
 	}
-	url = devBaseURL + url + '?' + list.join('&');
+	url = baseURL + url + '?' + list.join('&');
 	url = encodeURI(url);
 	downloadFile(url);
 }

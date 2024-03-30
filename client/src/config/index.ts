@@ -2,6 +2,9 @@
  * 公共配置文件
  */
 
+// 基础url
+export const baseURL = 'http://localhost:4000';
+
 const configObj = {
 	// h5模式宽高
 	canvasH5Width: 375,

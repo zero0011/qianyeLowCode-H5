@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import ThumbnailPanel from '@/components/ThumbnailPanel';
-import PreviewPage from '@/components/PreviewPage';
+import PreviewPage from '@/pages/components/PreviewPage';
 import { getMyPages } from '@/api';
 
 const items: TabsProps['items'] = [
