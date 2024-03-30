@@ -20,3 +20,18 @@ export const createUUID = function (){
 	});
 	return uuid;
 }
+
+/**
+ * 复制到剪贴板
+ */
+export const copyText = (textToCopy: string): Promise<boolean> => {
+	return new Promise((resolve, reject) => {
+		navigator.clipboard.writeText(textToCopy)
+			.then(() => {
+				resolve(true)
+			})
+			.catch(() => {
+				reject(false)
+			})
+	})
+}

@@ -196,6 +196,10 @@ small {
   margin-left: 20px;
 }
 
+.paddingT10 {
+  padding-top: 10px;
+}
+
 .img-responsive {
   width: 100%;
   height: auto;
