@@ -56,3 +56,43 @@
     }
   }
 }
+
+.components-libs-wrapper {
+  user-select: none;
+  height: 100%;
+  padding-top: 60px;
+  position: relative;
+  & ul {
+    padding: 10px;
+  }
+}
+
+.page-title {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  width: 100%;
+}
+
+.components-libs-title {
+  margin-bottom: 16px;
+}
+
+.components-lib-item {
+  color: #424242;
+  text-align: center;
+  background: #f4f4f4;
+  width: 80px;
+  float: left;
+  padding: 6px 0;
+  margin: 5px;
+  border: 1px solid #dddddd;
+  font-size: 12px;
+  cursor: pointer;
+  transition: All 0.3s ease-in-out;
+  &:hover {
+    background: #fff;
+    border: 1px solid @primary;
+    color: @primary;
+  }
+}
