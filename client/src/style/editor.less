@@ -2,6 +2,7 @@
   display: flex;
   height: 100%;
   position: relative;
+  background-color: #fff;
   .editor-side-bar {
     width: 55px;
   }
@@ -67,8 +68,10 @@
   }
 }
 
-.page-title {
+.page-title-editor {
   position: absolute;
+  font-size: 16px;
+  font-weight: bold;
   top: 16px;
   left: 0;
   width: 100%;
@@ -95,4 +98,30 @@
     border: 1px solid @primary;
     color: @primary;
   }
+}
+
+.scrollbar {
+  height: 100%;
+  overflow: hidden; 
+}
+
+.scrollbar:hover {
+  overflow: scroll;
+  transition: opacity 0.3s ease; /* 滚动条出现和消失的动画效果 */  
+}
+
+/* 样式化滚动条的轨道 */
+.scrollbar::-webkit-scrollbar {
+  width: 5px; /* 设置滚动条的宽度 */
+}
+
+/* 样式化滚动条的滑块 */
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* 设置滑块的颜色 */
+  border-radius: 10px; /* 设置滑块的圆角 */
+}
+
+/* 当滑块处于活动状态时（例如，用户正在拖动滑块），可以改变其样式 */ 
+.scrollbar::-webkit-scrollbar-thumb:active {
+  background: #555; /* 当滑块被按下时的颜色 */
 }

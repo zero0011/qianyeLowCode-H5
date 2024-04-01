@@ -1,6 +1,6 @@
 import config from './index'
 
-interface ComponentType {
+export interface ComponentType {
 	elName?: string
 	title?: string
 	icon?: string
@@ -8,7 +8,7 @@ interface ComponentType {
 	defaultStyle?: any
 }
 
-interface eleConfigType {
+export interface eleConfigType {
 	title: string
 	components: Array<ComponentType>
 }
