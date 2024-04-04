@@ -22,8 +22,9 @@ const ComponentLibs: FC = () => {
   }
 
   const handleClick = (element: ComponentType) => {
-    let props = getComponentProps(element.elName);
+    const props = getComponentProps(element.elName);
     console.log(props)
+    // TODO: redux
   }
 
   // TODO: 支持拖拽

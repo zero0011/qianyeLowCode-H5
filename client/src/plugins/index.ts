@@ -5,10 +5,22 @@
 
 import { ComponentType } from 'react';
 import Text from './text';
+import Image from './image';
+// import ImageCarousel from './image-carousel';
+// import RectangleBorder from './rectangle-border';
+// import Iframe from './iframe';
+import Button from './button';
+// import bgMusic from './bg-music';
 
 // 所有组件列表
 const components: ComponentType<any>[] = [
   Text,
+	Image,
+	// ImageCarousel,
+	// RectangleBorder,
+	// Iframe,
+	Button,
+	// bgMusic
 ]
 
 type qkRegisterComponentsObjectType = Record<string, ComponentType<any>>;
@@ -25,7 +37,6 @@ components.forEach(item => {
   }
 
 })
-
 
 export {
   qkRegisterComponentsObject
