@@ -1,7 +1,7 @@
 import config from './index'
 
 export interface ComponentType {
-	elName?: string
+	elName: string
 	title?: string
 	icon?: string
 	valueType?: string
