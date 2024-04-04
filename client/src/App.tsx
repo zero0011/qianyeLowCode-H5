@@ -47,7 +47,7 @@ export default function App() {
           <SiderMenusRoute />
         </Sider>}
         <Layout className={!isEditPage ? collapsed ? 'content-normal' : 'content-max' : ''}>
-          <Content style={{ margin: 0, minHeight: 280, height: `calc(100vh - 130px)` }}>
+          <Content className={isEditPage ? 'content-height-editor' : ''}>
             {/* Suspense处理懒加载的异步问题 */}
             <Suspense>
               <ContentRoute />
