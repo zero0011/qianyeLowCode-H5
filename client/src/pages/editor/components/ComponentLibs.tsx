@@ -6,16 +6,18 @@ const ComponentLibs: FC = () => {
 
   const eleDomRender = (ele: eleConfigType, index: number) => {
     return (
-      <li key={index} className="clearfix paddingB30">
+      <li key={ele.title} className="clearfix paddingB30">
         <div className="components-libs-title">
           <p>{ele.title}</p>
         </div>
 
         {ele.components && ele.components.length > 0 ? (
           ele.components.map((element: ComponentType, i: number) => (
-            <div key={i}>
+            <div key={element.elName}>
               <div className="components-lib-item">
-              <div className="lib-item-img"></div>
+              <div className="lib-item-img">
+                <span className={`${element.icon}`}></span>
+              </div>
               <p className="lib-item-title">{element.title}</p>
             </div>
             </div>
