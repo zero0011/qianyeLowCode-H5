@@ -7,11 +7,13 @@ import PageManage from "@/pages/Editor/components/PageManage";
 import TemplateLibs from "@/pages/Editor/components/TemplateLibs";
 import { getPageDetail } from "@/api";
 import { useLocation } from "react-router";
+import ControlBar from "./components/ControlBar";
+import EditorPan from "./components/EditorPan";
 
-// 定义 Editor 组件的 props 类型  
+// 定义 Editor 组件的 props 类型
 interface EditorProps {}
 
-const items: TabsProps['items'] = [
+const navigateItems: TabsProps['items'] = [
   {
     key: 'componentLibs',
     label: 
@@ -35,6 +37,34 @@ const items: TabsProps['items'] = [
   },
 ];
 
+const propertyItems: TabsProps['items'] = [
+  {
+    key: 'attr',
+    label: '属性',
+    children: 'Content of Tab Pane 1',
+  },
+  {
+    key: 'event',
+    label: '事件',
+    children: 'Content of Tab Pane 2',
+  },
+  {
+    key: 'animation',
+    label: '动画',
+    children: 'Content of Tab Pane 3',
+  },
+  {
+    key: 'script',
+    label: 'JS脚本',
+    children: 'Content of Tab Pane 3',
+  },
+  {
+    key: 'pageAttr',
+    label: '页面设置',
+    children: 'Content of Tab Pane 3',
+  },
+];
+
 const Editor: React.FC<EditorProps> = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -55,6 +85,10 @@ const Editor: React.FC<EditorProps> = () => {
     initPageData();
   }, [id])
 
+  const onChange = (key: string) => {
+    console.log(key);
+  };
+
   return (
     <div className="page-editor editor-wrapper">
 
@@ -63,7 +97,7 @@ const Editor: React.FC<EditorProps> = () => {
         <Tabs
           defaultActiveKey={activeSideBar}
           tabPosition="left"
-          items={items}
+          items={navigateItems}
           onChange={(key) => setActiveSideBar(key)}
         />
       </div>
@@ -74,6 +108,25 @@ const Editor: React.FC<EditorProps> = () => {
         {activeSideBar === 'pageManage' && <PageManage />}
         {activeSideBar === 'templateLibs' && <TemplateLibs />}
       </div>
+
+      {/* 页面编辑区域 */}
+      <div className="editor-main">
+        <div className="control-bar-wrapper">
+          <ControlBar />
+        </div>
+
+        <EditorPan />
+      </div>
+
+      {/* 属性编辑区域 */}
+      <div className="el-attr-edit-wrapper scrollbar-wrapper">
+        <div className="el-tabs-container">
+          <Tabs defaultActiveKey="attr" items={propertyItems} onChange={onChange} />
+        </div>
+      </div>
+
+      {/* 预览 */}
+      
 
     </div>
   )

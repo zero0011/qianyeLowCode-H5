@@ -29,7 +29,9 @@
   top: -44px;
   left: 0;
   width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
@@ -102,12 +104,12 @@
 
 .scrollbar {
   height: 100%;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .scrollbar:hover {
   overflow: scroll;
-  transition: opacity 0.3s ease; /* 滚动条出现和消失的动画效果 */  
+  transition: opacity 0.3s ease; /* 滚动条出现和消失的动画效果 */
 }
 
 /* 样式化滚动条的轨道 */
@@ -121,7 +123,86 @@
   border-radius: 10px; /* 设置滑块的圆角 */
 }
 
-/* 当滑块处于活动状态时（例如，用户正在拖动滑块），可以改变其样式 */ 
+/* 当滑块处于活动状态时（例如，用户正在拖动滑块），可以改变其样式 */
 .scrollbar::-webkit-scrollbar-thumb:active {
   background: #555; /* 当滑块被按下时的颜色 */
+}
+
+.components-contrl-bar {
+  display: inline-block;
+  z-index: 3;
+  padding: 2px 12px;
+  height: 100%;
+  .button-item {
+    display: inline-block;
+    width: 68px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: bottom;
+    font-size: 14px;
+    transition: color 0.28s, transform 0.28s;
+    user-select: none;
+    &.scale-wrappper {
+      width: 110px;
+      margin-right: 10px;
+      &:hover {
+        color: inherit;
+        transform: none;
+      }
+      & > .scale-btn {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 6px 2px;
+        font-size: 20px;
+        transition: all 0.28s;
+        &:hover {
+          color: @primary;
+        }
+      }
+    }
+    &:hover {
+      color: @primary;
+      transform: scale(1.02);
+      font-weight: bold;
+    }
+    &.disabled {
+      cursor: not-allowed;
+      color: @gray !important;
+    }
+    & > i {
+      font-size: 18px;
+      display: inline-block;
+      transition: all 0.28s;
+    }
+    & > p {
+      font-size: 14px;
+    }
+  }
+}
+
+.scale-input {
+  display: inline-block;
+  position: relative;
+  padding: 7px 0;
+  width: 46px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 17px;
+  margin: 0 4px;
+  &:hover {
+    background: #dfdfdf;
+  }
+}
+
+.upload-psd-btn-wrapper {
+  display: inline-block;
+}
+
+.el-tabs-container {
+  height: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 10px;
 }
