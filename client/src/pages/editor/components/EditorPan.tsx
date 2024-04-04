@@ -2,7 +2,9 @@ import React from "react";
 
 function EditorPan () {
   return (
-    <div>EditorPan</div>
+    <div className="editor-pane">
+      
+    </div>
   )
 }
 

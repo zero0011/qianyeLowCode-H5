@@ -206,3 +206,88 @@
   padding-right: 16px;
   padding-bottom: 10px;
 }
+
+.editor-pane {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #f5f5f5;
+  border-width: 0 1px;
+  background-image: linear-gradient(45deg, #f5f5f5 25%, transparent 0, transparent 75%, #f5f5f5 0), linear-gradient(45deg, #f5f5f5 25%, transparent 0, transparent 75%, #f5f5f5 0);
+  background-position: 0 0, 13px 13px;
+  background-size: 26px 26px;
+  display: flex;
+  justify-content: center;
+}
+
+.editor-pane-inner {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  padding: 20px;
+}
+
+.editor-main {
+  border-radius: 3px;
+  position: relative;
+  background: white;
+  transform-origin: center top;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlQTFRF9fX18PDwAAAABQ8/pgAAAAN0Uk5T/yIA41y2EwAAABhJREFUeJxjYIAC0VAQcGCQWgUCDUONBgDH8Fwzu33LswAAAABJRU5ErkJggg==");
+}
+
+.page-preview-wrapper {
+  height: 100%;
+  position: relative;
+}
+
+.page-wrapper-mask {
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  outline: rgba(236, 238, 240, 0.77) solid 10000px;
+}
+
+.element-on-edit-pane {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.page-wrapper-menu-operation {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  width: 0;
+  background: white;
+  color: #333;
+  text-align: center;
+  z-index: 1002;
+  border-radius: 4px;
+  display: none;
+  transition: all 0.28s;
+  opacity: 0;
+  .menu-item {
+    padding: 10px;
+    cursor: pointer;
+    &.i {
+      font-size: 24px;
+      line-height: 30px;
+    }
+    &:hover {
+      background: rgba(37, 165, 137, 0.09);
+      color: @primary;
+      &.i {
+        font-weight: bold;
+        font-size: 26px;
+      }
+    }
+  }
+  &.active {
+    display: block;
+    width: 60px;
+    opacity: 1;
+  }
+}

@@ -53,12 +53,12 @@ export default function App() {
               <ContentRoute />
             </Suspense>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
+          {!isEditPage && <Footer style={{ textAlign: 'center' }}>
             <a href="https://github.com/zero0011/qianyeLowCode-H5">
               Fork me on Github
             </a>
             , Mixed by zero0011 @2024, currently under developing...
-          </Footer>
+          </Footer>}
         </Layout>
       </Layout>
 
