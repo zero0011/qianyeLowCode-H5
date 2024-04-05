@@ -4,7 +4,16 @@ import {
   SET_ACTIVE_ELEMENT_UUID,
 } from "./actions";
 
-const initialState = {
+interface StateType {
+  projectData: Object
+  activePageUUID: string
+  activeElementUUID: string
+  historyCache: Array<any>
+  currentHistoryIndex: number
+  activeAttrEditCollapse: Array<string>
+}
+
+const initialState: StateType = {
   // 当前编辑器编辑工程项目数据
   projectData: {},
   // 当前正在编辑的页面uuid

@@ -1,41 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Tabs, Tooltip } from 'antd';
+import { Tabs, Tooltip, Modal, Button } from 'antd';
 import type { TabsProps } from 'antd';
 import { UnorderedListOutlined, BookOutlined, CodeSandboxOutlined } from "@ant-design/icons";
 import ComponentLibs from "@/pages/Editor/components/ComponentLibs";
 import PageManage from "@/pages/Editor/components/PageManage";
 import TemplateLibs from "@/pages/Editor/components/TemplateLibs";
-import { getPageDetail } from "@/api";
-import { useLocation } from "react-router";
+import { getPageDetail, updatePage } from "@/api";
+import { useLocation, useHistory } from "react-router";
 import ControlBar from "./components/ControlBar";
 import EditorPan from "./components/EditorPan";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProjectData } from "@/redux/editor/actions";
 
 // 定义 Editor 组件的 props 类型
-interface EditorProps {}
+interface EditorProps { }
 
 const navigateItems: TabsProps['items'] = [
   {
     key: 'componentLibs',
-    label: 
-    <Tooltip title="组件列表" placement="right">
-      <UnorderedListOutlined />
-    </Tooltip>
+    label:
+      <Tooltip title="组件列表" placement="right">
+        <UnorderedListOutlined />
+      </Tooltip>
   },
   {
     key: 'pageManage',
     label:
-    <Tooltip title="页面管理" placement="right">
-      <BookOutlined />
-    </Tooltip>
+      <Tooltip title="页面管理" placement="right">
+        <BookOutlined />
+      </Tooltip>
   },
   {
     key: 'templateLibs',
     label:
-    <Tooltip title="模板库" placement="right">
-      <CodeSandboxOutlined />
-    </Tooltip>
+      <Tooltip title="模板库" placement="right">
+        <CodeSandboxOutlined />
+      </Tooltip>
   },
 ];
 
@@ -70,9 +70,14 @@ const propertyItems: TabsProps['items'] = [
 const Editor: React.FC<EditorProps> = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const history = useHistory();
   const searchParams = new URLSearchParams(location.search);
   const [id, setId] = useState(searchParams.get('id'));
   const [activeSideBar, setActiveSideBar] = useState('componentLibs');
+  const [scale, setScale] = useState(1);
+  const [showPreview, setShowPreview] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const projectData = useSelector((state: any) => state.editor.projectData);
 
   const initPageData = async () => {
     try {
@@ -80,7 +85,7 @@ const Editor: React.FC<EditorProps> = () => {
       dispatch(setProjectData({
         ...res.body
       }))
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
   }
@@ -93,6 +98,30 @@ const Editor: React.FC<EditorProps> = () => {
   const onChange = (key: string) => {
 
   };
+
+  // 更新画板大小
+  const updateScale = (type: string, value: number) => {
+    let newScale = 0;
+    if (type === 'plus') {
+      newScale = scale + (value || 0.1) > 2 ? 2 : scale + (value || 0.1);
+    } else if (type === 'reduce') {
+      newScale = scale - (value || 0.1) > 0.5 ? scale - (value || 0.1) : 0.5;
+    } else if (type === 'reset') {
+      newScale = value || 1;
+    }
+    setScale(newScale);
+  }
+
+  const showPreviewFn = async () => {
+    await updatePage({
+      pageData: projectData
+    })
+    setShowPreview(true);
+  }
+
+  const cancelFn = () => {
+    setIsModalOpen(true)
+  }
 
   return (
     <div className="page-editor editor-wrapper">
@@ -117,10 +146,15 @@ const Editor: React.FC<EditorProps> = () => {
       {/* 页面编辑区域 */}
       <div className="editor-main">
         <div className="control-bar-wrapper">
-          <ControlBar />
+          <ControlBar
+            scale={scale}
+            updateScale={updateScale}
+            showPreviewFn={showPreviewFn}
+            cancelFn={cancelFn}
+          />
         </div>
 
-        <EditorPan />
+        <EditorPan scale={scale} />
       </div>
 
       {/* 属性编辑区域 */}
@@ -133,6 +167,24 @@ const Editor: React.FC<EditorProps> = () => {
       {/* 预览 */}
 
 
+      {/* 退出提示 */}
+
+      <Modal title="提示"
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        width={400}
+        footer={[
+          <Button key="back" onClick={() => setIsModalOpen(false)}>
+            取消
+          </Button>,
+          <Button key="submit" type="primary" onClick={() => {
+            history.push('/')
+          }}>
+            确定
+          </Button>]}
+      >
+        <p>确认退出编辑?</p>
+      </Modal>
     </div>
   )
 }

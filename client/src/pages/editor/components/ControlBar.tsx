@@ -2,20 +2,31 @@
 
 import React, { FC } from "react";
 
-const ControlBar: FC = () => {
+interface ControlBarType {
+  scale: number
+  updateScale: Function
+  showPreviewFn: Function
+  cancelFn: Function
+}
 
+const ControlBar: FC<ControlBarType> = ({
+  scale,
+  updateScale,
+  showPreviewFn,
+  cancelFn
+}) => {
 
   
   return (
     <div className="components-contrl-bar">
       <div className="button-item scale-wrappper">
-        <span className="scale-btn">
-          <span className="iconfont icon-zoom-out"></span>
-        </span>
-        <span className="scale-input">{100}%</span>
-
-        <span className="scale-btn">
+        <span className="scale-btn" onClick={() => updateScale('reduce')}>
           <span className="iconfont icon-zoom-in"></span>
+        </span>
+        <span className="scale-input">{(scale * 100).toFixed(0)}%</span>
+
+        <span className="scale-btn" onClick={() => updateScale('plus')}>
+          <span className="iconfont icon-zoom-out"></span>
         </span>
       </div>
 
@@ -29,12 +40,12 @@ const ControlBar: FC = () => {
         <p>重做</p>
       </div>
 
-      <div className="button-item">
+      <div className="button-item" onClick={() => showPreviewFn()}>
         <span className="iconfont icon-icon_yulan"></span>
         <p>预览保存</p>
       </div>
 
-      <div className="button-item">
+      <div className="button-item" onClick={() => cancelFn()}>
         <span className="iconfont icon-icon_tuichu"></span>
         <p>退出</p>
       </div>
