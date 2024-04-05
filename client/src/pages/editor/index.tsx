@@ -9,6 +9,8 @@ import { getPageDetail } from "@/api";
 import { useLocation } from "react-router";
 import ControlBar from "./components/ControlBar";
 import EditorPan from "./components/EditorPan";
+import { useDispatch } from "react-redux";
+import { setPrjectData } from "@/redux/editor/actions";
 
 // 定义 Editor 组件的 props 类型
 interface EditorProps {}
@@ -67,6 +69,7 @@ const propertyItems: TabsProps['items'] = [
 
 const Editor: React.FC<EditorProps> = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const searchParams = new URLSearchParams(location.search);
   const [id, setId] = useState(searchParams.get('id'));
   const [activeSideBar, setActiveSideBar] = useState('componentLibs');
@@ -126,7 +129,7 @@ const Editor: React.FC<EditorProps> = () => {
       </div>
 
       {/* 预览 */}
-      
+
 
     </div>
   )

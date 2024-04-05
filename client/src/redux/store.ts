@@ -1,6 +1,12 @@
-import { legacy_createStore as createStore } from "redux";
-import reducer from "./reducers";
+import { legacy_createStore as createStore, combineReducers } from "redux";
+import userReducer from "./user/reducers";
+import editorReducer from "./editor/reducers";
 import { setLocalStorage } from "@/utils/cookie";
+
+const reducer = combineReducers({  
+  user: userReducer,
+  editor: editorReducer
+});
 
 const store = createStore(
   reducer

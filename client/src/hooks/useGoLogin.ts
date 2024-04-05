@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { updateAccessToken } from "@/redux/actions";
+import { updateAccessToken } from "@/redux/user/actions";
 
 function useGoLogin() {
 

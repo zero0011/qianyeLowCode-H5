@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Form, type FormProps, Input } from 'antd';
 import userModel from "@/lib/userModel";
 import { useDispatch } from 'react-redux';
-import { updateAccessToken, updateUserInfo } from '@/redux/actions';
+import { updateAccessToken, updateUserInfo } from '@/redux/user/actions';
 import { errorMessage } from "@/utils";
 import useGoBeforeLoginUrl from "@/hooks/useGoBeforeLoginUrl";
 import "@/style/login.less"

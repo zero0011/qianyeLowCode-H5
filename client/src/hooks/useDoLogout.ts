@@ -1,7 +1,7 @@
 import React from "react";
 import useGoLogin from "./useGoLogin";
 import { useDispatch } from "react-redux";
-import { updateAccessToken } from "@/redux/actions";
+import { updateAccessToken } from "@/redux/user/actions";
 
 function useDoLogout() {
   const dispatch = useDispatch();

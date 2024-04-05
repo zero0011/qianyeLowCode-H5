@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import { UPDATE_ACCESS_TOKEN, UPDATE_USER_INFO, UPDATE_USER_PERMISSION } from './actions';
 import { getLocalStorage } from '@/utils/cookie';
 
@@ -11,7 +10,7 @@ const initialState = {
 	userInfo: {},
   ...persistedState
 };
-  
+
 function userReducer(state = initialState, action: any) {  
   switch (action.type) {
     case UPDATE_ACCESS_TOKEN:
@@ -34,8 +33,4 @@ function userReducer(state = initialState, action: any) {
   }
 }
 
-const reducer = combineReducers({  
-  user: userReducer  
-});
-
-export default reducer;
+export default userReducer;
