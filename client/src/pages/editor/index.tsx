@@ -10,7 +10,7 @@ import { useLocation } from "react-router";
 import ControlBar from "./components/ControlBar";
 import EditorPan from "./components/EditorPan";
 import { useDispatch } from "react-redux";
-import { setPrjectData } from "@/redux/editor/actions";
+import { setProjectData } from "@/redux/editor/actions";
 
 // 定义 Editor 组件的 props 类型
 interface EditorProps {}
@@ -77,19 +77,21 @@ const Editor: React.FC<EditorProps> = () => {
   const initPageData = async () => {
     try {
       const res = await getPageDetail({ pageId: id });
-      // TODO: redux
-      console.log(res)
+      dispatch(setProjectData({
+        ...res.body
+      }))
     } catch(err) {
       console.log(err)
     }
   }
 
   useEffect(() => {
+    dispatch(setProjectData())
     initPageData();
   }, [id])
 
   const onChange = (key: string) => {
-    console.log(key);
+
   };
 
   return (
