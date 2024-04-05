@@ -21,7 +21,7 @@ const iframeStyle = {
 }
 
 
-const previewWrapper: FC<previewWrapperType> = ({
+const PreviewWrapper: FC<previewWrapperType> = ({
   pageId,
   closePreview,
   children
@@ -47,4 +47,4 @@ const previewWrapper: FC<previewWrapperType> = ({
 }
 
 
-export default previewWrapper;
+export default PreviewWrapper;
