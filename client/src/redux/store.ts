@@ -1,4 +1,5 @@
-import { legacy_createStore as createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
 import userReducer from "./user/reducers";
 import editorReducer from "./editor/reducers";
 import { setLocalStorage } from "@/utils/cookie";
@@ -9,7 +10,8 @@ const reducer = combineReducers({
 });
 
 const store = createStore(
-  reducer
+  reducer,
+  applyMiddleware(thunkMiddleware)
 )
 
 store.subscribe(() => {

@@ -6,7 +6,8 @@ import {
   SET_PROJECT_DATA_FLIE,
   SET_PROJECT_DATA_DESC,
   SET_PROJECT_DATA_SLIDE,
-  SET_PROJECT_DATA_STATUS
+  SET_PROJECT_DATA_STATUS,
+  INSERT_PAGE
 } from "./actions";
 
 interface StateType {
@@ -88,6 +89,16 @@ function editorReducer(state = initialState, action: any) {
       return {
         ...state,
         activeElementUUID: action.data || ''
+      }
+
+    case INSERT_PAGE:
+      // TODO:
+      return {
+        ...state,
+        projectData: {
+          ...state.projectData,
+          pages: []
+        }
       }
     default:
       return state;

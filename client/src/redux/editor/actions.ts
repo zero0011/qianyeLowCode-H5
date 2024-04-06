@@ -1,4 +1,3 @@
-import editorProjectConfig from '@/pages/Editor/DataModel';
 export const SET_PROJECT_DATA = 'SET_PROJECT_DATA';
 export const SET_PROJECT_DATA_TITLE = 'SET_PROJECT_DATA_TITLE';
 export const SET_PROJECT_DATA_DESC = 'SET_PROJECT_DATA_DESC';
@@ -7,16 +6,28 @@ export const SET_PROJECT_DATA_SLIDE = 'SET_PROJECT_DATA_SLIDE';
 export const SET_PROJECT_DATA_STATUS = 'SET_PROJECT_DATA_STATUS';
 export const SET_ACTIVE_PAGE_UUID = 'SET_ACTIVE_PAGE_UUID';
 export const SET_ACTIVE_ELEMENT_UUID = 'SET_ACTIVE_ELEMENT_UUID';
+export const INSERT_PAGE = 'INSERT_PAGE';
 
 // 初始化编辑项目数据
-export function setProjectData(data?: any) {
-  let projectData = data;
-  if (!projectData) {
-    projectData = editorProjectConfig.getProjectConfig();
-  }
-
-  return { type: SET_PROJECT_DATA, data: projectData }
+export function setProjectData(data: any) {
+  return { type: SET_PROJECT_DATA, data }
 }
+
+export function setActivePageUUID(data: any) {
+  return { type: SET_ACTIVE_PAGE_UUID, data }
+}
+
+export function setActiveElementUUID(data: any) {
+  return { type: SET_ACTIVE_ELEMENT_UUID, data }
+}
+
+// 新增页面
+export function insertPage(data: any, index: number) {
+  return { type: INSERT_PAGE, data, index }
+}
+
+
+
 
 // 修改 title
 export function setProjectDataTitle(title: string) {
@@ -41,13 +52,4 @@ export function setProjectDataSlideNumber(slideNumber: boolean) {
 // 修改 status
 export function setProjectDataStatus(status: number) {
   return { type: SET_PROJECT_DATA_STATUS , status }
-}
-
-export function setActivePageUUID(data: any) {
-  return { type: SET_ACTIVE_PAGE_UUID, data }
-}
-
-export function setActiveElementUUID(data: any) {
-
-  return { type: SET_ACTIVE_ELEMENT_UUID, data }
 }

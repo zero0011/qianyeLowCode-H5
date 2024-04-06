@@ -10,7 +10,7 @@ import { useLocation, useHistory } from "react-router";
 import ControlBar from "./components/ControlBar";
 import EditorPan from "./components/EditorPan";
 import { useDispatch, useSelector } from "react-redux";
-import { setProjectData } from "@/redux/editor/actions";
+import { setProjectDataAsync } from "@/redux/editor/asyncActions";
 import Preview from "./components/Preview";
 import { successMessage, errorMessage } from "@/utils";
 
@@ -84,7 +84,7 @@ const Editor: React.FC<EditorProps> = () => {
   const initPageData = async () => {
     try {
       const res = await getPageDetail({ pageId: id });
-      dispatch(setProjectData({
+      dispatch(setProjectDataAsync({
         ...res.body
       }))
     } catch (err) {
@@ -93,12 +93,12 @@ const Editor: React.FC<EditorProps> = () => {
   }
 
   useEffect(() => {
-    dispatch(setProjectData())
+    dispatch(setProjectDataAsync())
     initPageData();
   }, [id])
 
   const onChange = (key: string) => {
-
+    
   };
 
   // 更新画板大小

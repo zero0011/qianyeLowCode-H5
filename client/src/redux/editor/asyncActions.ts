@@ -1,0 +1,46 @@
+import { AnyAction, Dispatch } from "redux";
+import editorProjectConfig from '@/pages/Editor/DataModel';
+import {
+  setProjectData,
+  setActivePageUUID,
+  setActiveElementUUID,
+  insertPage
+} from "./actions";
+import store from "../store";
+
+export const setProjectDataAsync = (data?: any) => async (dispatch: Dispatch<AnyAction>) => {
+  let projectData = data;
+  if (!projectData) {
+    projectData = editorProjectConfig.getProjectConfig();
+  }
+  dispatch(setProjectData(projectData));
+
+  const state = store.getState();
+  if (!state.editor.projectData.pages || !state.editor.projectData.pages.length) {
+    addPage()
+  }
+  setActivePageUUIDAsync(state.editor.projectData.pages[0].uuid);
+}
+
+export const addPage = (uuid?: string) => async (dispatch: Dispatch<AnyAction>) => {
+  const state = store.getState();
+  let data = editorProjectConfig.getPageConfig();
+  let index = -1;
+  if (uuid) {
+    index = state.editor.projectData.pages.findIndex((v: { uuid: string; }) => v.uuid === uuid)
+  } else {
+    index = state.editor.projectData.pages.length -1;
+  }
+  dispatch(insertPage(data, index));
+  
+}
+
+export const setActivePageUUIDAsync = (uuid: string) => async (dispatch: Dispatch<AnyAction>) => {
+  dispatch(setActivePageUUID(uuid));
+  // 当前选中页面切换后清空元素选中的uuid
+  setActiveElementUUIDAsync('');
+}
+
+export const setActiveElementUUIDAsync = (uuid: string) => async (dispatch: Dispatch<AnyAction>) => {
+  dispatch(setActiveElementUUID(uuid));
+}
