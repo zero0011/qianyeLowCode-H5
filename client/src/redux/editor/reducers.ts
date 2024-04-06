@@ -2,6 +2,11 @@ import {
   SET_PROJECT_DATA,
   SET_ACTIVE_PAGE_UUID,
   SET_ACTIVE_ELEMENT_UUID,
+  SET_PROJECT_DATA_TITLE,
+  SET_PROJECT_DATA_FLIE,
+  SET_PROJECT_DATA_DESC,
+  SET_PROJECT_DATA_SLIDE,
+  SET_PROJECT_DATA_STATUS
 } from "./actions";
 
 interface StateType {
@@ -33,6 +38,46 @@ function editorReducer(state = initialState, action: any) {
       return {
         ...state,
         projectData: action.data || {}
+      }
+    case SET_PROJECT_DATA_TITLE:
+      return {
+        ...state,  
+        projectData: {
+          ...state.projectData,
+          title: action.title
+        },  
+      }
+    case SET_PROJECT_DATA_DESC:
+      return  {
+        ...state,
+        projectData: {
+          ...state.projectData,
+          description: action.description
+        }
+      }
+    case SET_PROJECT_DATA_FLIE:
+      return  {
+        ...state,
+        projectData: {
+          ...state.projectData,
+          flipType: action.flipType
+        }
+      }
+    case SET_PROJECT_DATA_SLIDE:
+      return {
+        ...state,
+        projectData: {
+          ...state.projectData,
+          slideNumber: action.slideNumber
+        }
+      }
+    case SET_PROJECT_DATA_STATUS:
+      return {
+        ...state,
+        projectData: {
+          ...state.projectData,
+          status: action.status
+        }
       }
     case SET_ACTIVE_PAGE_UUID:
       return {

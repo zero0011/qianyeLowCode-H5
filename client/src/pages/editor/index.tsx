@@ -11,6 +11,8 @@ import ControlBar from "./components/ControlBar";
 import EditorPan from "./components/EditorPan";
 import { useDispatch, useSelector } from "react-redux";
 import { setProjectData } from "@/redux/editor/actions";
+import Preview from "./components/Preview";
+import { successMessage, errorMessage } from "@/utils";
 
 // 定义 Editor 组件的 props 类型
 interface EditorProps { }
@@ -72,7 +74,7 @@ const Editor: React.FC<EditorProps> = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const searchParams = new URLSearchParams(location.search);
-  const [id, setId] = useState(searchParams.get('id'));
+  const id = searchParams.get('id') || '';
   const [activeSideBar, setActiveSideBar] = useState('componentLibs');
   const [scale, setScale] = useState(1);
   const [showPreview, setShowPreview] = useState(false);
@@ -123,6 +125,32 @@ const Editor: React.FC<EditorProps> = () => {
     setIsModalOpen(true)
   }
 
+  const publishFn = async () => {
+    let data = { ...projectData, isPublish: true };
+    try {
+      await updatePage({
+        pageData: data
+      })
+      successMessage('已成功保存并发布!');
+      setShowPreview(false);
+      history.push('/');
+    } catch (err) {
+      errorMessage('保存失败!');
+    }
+  }
+
+  const saveFn = async () => {
+    try {
+      await updatePage({
+        pageData: projectData
+      })
+      successMessage('保存成功!');
+      setShowPreview(false)
+    } catch (err) {
+      errorMessage('保存失败!');
+    }
+  }
+
   return (
     <div className="page-editor editor-wrapper">
 
@@ -165,6 +193,14 @@ const Editor: React.FC<EditorProps> = () => {
       </div>
 
       {/* 预览 */}
+      {showPreview &&
+        <Preview
+          pageData={projectData}
+          pageId={id}
+          closePreview={() => setShowPreview(false)}
+          publishFn={publishFn}
+          saveFn={saveFn}
+        />}
 
 
       {/* 退出提示 */}
