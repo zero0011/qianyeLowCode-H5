@@ -7,11 +7,12 @@ import {
   SET_PROJECT_DATA_DESC,
   SET_PROJECT_DATA_SLIDE,
   SET_PROJECT_DATA_STATUS,
-  INSERT_PAGE
+  INSERT_PAGE,
+  SET_ELEMENT_COMMONSTYLE
 } from "./actions";
 
 interface StateType {
-  projectData: Object
+  projectData: any
   activePageUUID: string
   activeElementUUID: string
   historyCache: Array<any>
@@ -90,6 +91,21 @@ function editorReducer(state = initialState, action: any) {
         ...state,
         activeElementUUID: action.data || ''
       }
+    
+    case SET_ELEMENT_COMMONSTYLE:
+      const currentPageIndex = action.currentPageIndex;
+      const activeElementIndex = action.activeElementIndex;
+      const page = state.projectData.pages[currentPageIndex];
+      const element = page.elements[activeElementIndex] || {};
+      element.commonStyle = action.data;
+      return {
+        ...state,
+        projectData: {
+          ...state.projectData,
+          pages: state.projectData.pages.splice(currentPageIndex, 1, page)
+        }
+      }
+      
 
     case INSERT_PAGE:
       // TODO:

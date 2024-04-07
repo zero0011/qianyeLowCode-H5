@@ -139,17 +139,17 @@ let getProjectConfig = function () {
  */
 let getCommonStyle = function (styleObj: any, scalingRatio = 1) {
 	let needUnitStr = ['width', 'height','top', 'left', 'paddingTop', 'paddingLeft', 'paddingRight', 'paddingBottom', 'marginTop', 'marginLeft', 'marginRight', 'marginBottom', 'borderWidth','fontSize', 'borderRadius', 'letterSpacing']
-	let style ={}
+	let style: any ={}
 
-	// for (let key in styleObj){
-	// 	if(needUnitStr.includes(key)){
-	// 		style[key] = (styleObj[key] * scalingRatio) + 'px'
-	// 	}else{
-	// 		style[key] = styleObj[key]
-	// 	}
-	// }
-	// style.transform = `rotate(${style.rotate}deg)`
-	// style.backgroundImage = style.backgroundImage ? `url(${style.backgroundImage})` : '';
+	for (let key in styleObj){
+		if(needUnitStr.includes(key)){
+			style[key] = (styleObj[key] * scalingRatio) + 'px'
+		}else{
+			style[key] = styleObj[key]
+		}
+	}
+	style.transform = `rotate(${style.rotate}deg)`
+	style.backgroundImage = style.backgroundImage ? `url(${style.backgroundImage})` : '';
 	return style;
 }
 

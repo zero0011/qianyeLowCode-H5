@@ -7,6 +7,7 @@ export const SET_PROJECT_DATA_STATUS = 'SET_PROJECT_DATA_STATUS';
 export const SET_ACTIVE_PAGE_UUID = 'SET_ACTIVE_PAGE_UUID';
 export const SET_ACTIVE_ELEMENT_UUID = 'SET_ACTIVE_ELEMENT_UUID';
 export const INSERT_PAGE = 'INSERT_PAGE';
+export const SET_ELEMENT_COMMONSTYLE = 'SET_ELEMENT_COMMONSTYLE'
 
 // 初始化编辑项目数据
 export function setProjectData(data: any) {
@@ -26,6 +27,10 @@ export function insertPage(data: any, index: number) {
   return { type: INSERT_PAGE, data, index }
 }
 
+// 修改element中的commonStyle
+export function setElementCommonStyle(data: any, currentPageIndex: number, activeElementIndex: number) {
+  return { type: SET_ELEMENT_COMMONSTYLE, data, currentPageIndex, activeElementIndex }
+}
 
 
 

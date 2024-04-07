@@ -4,11 +4,11 @@ import {
   setProjectData,
   setActivePageUUID,
   setActiveElementUUID,
-  insertPage
+  insertPage,
 } from "./actions";
 import store from "../store";
 
-export const setProjectDataAsync = (data?: any) => async (dispatch: Dispatch<AnyAction>) => {
+export const setProjectDataAsync = (data?: any) => async (dispatch: any) => {
   let projectData = data;
   if (!projectData) {
     projectData = editorProjectConfig.getProjectConfig();
@@ -17,9 +17,9 @@ export const setProjectDataAsync = (data?: any) => async (dispatch: Dispatch<Any
 
   const state = store.getState();
   if (!state.editor.projectData.pages || !state.editor.projectData.pages.length) {
-    addPage()
+    dispatch(addPage())
   }
-  setActivePageUUIDAsync(state.editor.projectData.pages[0].uuid);
+  dispatch(setActivePageUUIDAsync(state.editor.projectData.pages[0].uuid))
 }
 
 export const addPage = (uuid?: string) => async (dispatch: Dispatch<AnyAction>) => {
@@ -32,13 +32,12 @@ export const addPage = (uuid?: string) => async (dispatch: Dispatch<AnyAction>) 
     index = state.editor.projectData.pages.length -1;
   }
   dispatch(insertPage(data, index));
-  
 }
 
-export const setActivePageUUIDAsync = (uuid: string) => async (dispatch: Dispatch<AnyAction>) => {
+export const setActivePageUUIDAsync = (uuid: string) => (dispatch: any) => {
   dispatch(setActivePageUUID(uuid));
   // 当前选中页面切换后清空元素选中的uuid
-  setActiveElementUUIDAsync('');
+  dispatch(setActiveElementUUIDAsync(''))
 }
 
 export const setActiveElementUUIDAsync = (uuid: string) => async (dispatch: Dispatch<AnyAction>) => {
