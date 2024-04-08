@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProjectDataAsync } from "@/redux/editor/asyncActions";
 import Preview from "./components/Preview";
 import { successMessage, errorMessage } from "@/utils";
+import EventEdit from "./components/EventEdit";
 
 // 定义 Editor 组件的 props 类型
 interface EditorProps { }
@@ -50,7 +51,7 @@ const propertyItems: TabsProps['items'] = [
   {
     key: 'event',
     label: '事件',
-    children: 'Content of Tab Pane 2',
+    children: <EventEdit />,
   },
   {
     key: 'animation',
@@ -188,7 +189,7 @@ const Editor: React.FC<EditorProps> = () => {
       {/* 属性编辑区域 */}
       <div className="el-attr-edit-wrapper scrollbar-wrapper">
         <div className="el-tabs-container">
-          <Tabs defaultActiveKey="attr" items={propertyItems} onChange={onChange} />
+          <Tabs defaultActiveKey="event" items={propertyItems} onChange={onChange} />
         </div>
       </div>
 
