@@ -26,7 +26,7 @@ h5 端的低代码平台其实已经不少了，但是使用最新的 react17 �
   - 拖拽对齐功能
   - 生成 h5 自适应不同宽高比手机 - rem
   - 协同编辑功能
-  - 编辑回退
+  - 编辑撤回与编辑恢复
   - 发布模版后，生成线上链接（包括二维码），支持扫描预览
   - 新增加组件库的实现要点
 
@@ -139,18 +139,42 @@ react中没有类似动态组件的工具，所以我们必须自己来实现。
 - vh/vw
 
 
-### 5. 编辑回退 - redux
+### 5. 编辑撤销与编辑恢复 - redux
 
-使用redux维持编辑器状态，编辑回退也可以使用redux
+使用redux维持编辑器状态，编辑撤销与编辑恢复也可以使用redux
 
 具体如下：
 
-1. 
+```js
+const state = {
+  // 历史记录数组
+  historyCache: [],
+  // redo undo 指针
+  currentHistoryIndex: -1,
+}
+```
+
+1. 在每次拖拽和属性更新事件后，去调用 historyCache.push 为历史数组增加一项。
+```js
+historyCache.push({
+    projectData: cloneDeep(state.editor.projectData),
+    activePageUUID: state.editor.activePageUUID,
+    activeElementUUID: state.editor.activeElementUUID
+  })
+```
+
+2. 当点击撤销时，把当前指针减1，根据指针拿上最新push进历史数组的配置项。
+再调用 replace 方法，替代redux中目前的配置数据，编辑器会去主动监听props的改变，从而恢复到上一个编辑状态。
+
+3. 当点击恢复时，把当前指针加1，根据指针拿到历史数组的配置项。
+再调用 replace 方法，替代redux中目前的配置数据，编辑器会去主动监听props的改变，从而恢复到下一个编辑状态。
 
 
 ### 6. 增加点击事件机制
 
 - 点击按钮 - 组件出现或者消失
+
+
 
 
 
@@ -237,7 +261,9 @@ style-components
 
 
 
+
 ## 广告场景术语
+
 
 
 
@@ -245,3 +271,8 @@ style-components
 ## react中的自定义hooks
 
 鼓励开发者将业务逻辑封装成 自定义hooks 而不是工具函数。
+
+
+## 算法题& js手写题
+
+

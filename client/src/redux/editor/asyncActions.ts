@@ -5,6 +5,7 @@ import {
   setActivePageUUID,
   setActiveElementUUID,
   insertPage,
+  addHistoryCache
 } from "./actions";
 import store from "../store";
 
@@ -43,3 +44,10 @@ export const setActivePageUUIDAsync = (uuid: string) => (dispatch: any) => {
 export const setActiveElementUUIDAsync = (uuid: string) => async (dispatch: Dispatch<AnyAction>) => {
   dispatch(setActiveElementUUID(uuid));
 }
+
+
+// ================================历史纪录========================================
+export const addHistoryCacheAsync = () => (dispatch: any) => {
+  dispatch(addHistoryCache())
+}
+

@@ -1,6 +1,7 @@
 // 编辑区控制组件
 
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
 
 interface ControlBarType {
   scale: number
@@ -15,7 +16,16 @@ const ControlBar: FC<ControlBarType> = ({
   showPreviewFn,
   cancelFn
 }) => {
+  const canUndo = useSelector((state: any) => state.editor.currentHistoryIndex > 0);
+  const canRedo = useSelector((state: any) => state.editor.historyCache.length > state.editor.currentHistoryIndex + 1);
 
+  const editorUndo = () => {
+    console.log('1')
+  }
+
+  const editorRedo = () => {
+    console.log('1')
+  }
   
   return (
     <div className="components-contrl-bar">
@@ -30,12 +40,12 @@ const ControlBar: FC<ControlBarType> = ({
         </span>
       </div>
 
-      <div className="button-item">
+      <div className={`button-item ${canUndo ? '' : 'disabled'}`} onClick={editorUndo}>
         <span className="iconfont icon-iconundo1"></span>
         <p>撤销</p>
       </div>
 
-      <div className="button-item">
+      <div className={`button-item ${canRedo ? '' : 'disabled'}`} onClick={editorRedo}>
         <span className="iconfont icon-iconredo1"></span>
         <p>重做</p>
       </div>

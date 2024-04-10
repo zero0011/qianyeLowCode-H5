@@ -8,7 +8,11 @@ import {
   SET_PROJECT_DATA_SLIDE,
   SET_PROJECT_DATA_STATUS,
   INSERT_PAGE,
-  SET_ELEMENT_COMMONSTYLE
+  SET_ELEMENT_COMMONSTYLE,
+  ADD_HISTORY_CACHE,
+  EDITOR_UNDO,
+  EDITOR_REDO,
+  RELAPCE_EDITOR_STATE
 } from "./actions";
 
 interface StateType {
@@ -106,6 +110,40 @@ function editorReducer(state = initialState, action: any) {
         }
       }
       
+    case ADD_HISTORY_CACHE:
+      const historyCache = action.historyCache;
+      const currentHistoryIndex = action.currentHistoryIndex;
+
+      return {
+        ...state,
+        historyCache,
+        currentHistoryIndex
+      }
+
+    case EDITOR_UNDO:
+      const currentHistoryIndexUndo = action.currentHistoryIndex;
+      return {
+        ...state,
+        currentHistoryIndex: currentHistoryIndexUndo
+      }
+
+    case EDITOR_REDO:
+      const currentHistoryIndexRedo = action.currentHistoryIndex;
+      return {
+        ...state,
+        currentHistoryIndex: currentHistoryIndexRedo
+      }
+
+    case RELAPCE_EDITOR_STATE:
+      const projectData = action.projectData;
+      const activePageUUID = action.activePageUUID;
+      const activeElementUUID = action.activeElementUUID;
+      return {
+        ...state,
+        projectData,
+        activePageUUID,
+        activeElementUUID
+      }
 
     case INSERT_PAGE:
       // TODO:
